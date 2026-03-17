@@ -1,4 +1,4 @@
-# ============================================================================
+﻿# ============================================================================
 # AGENT 4 - INTERACTION - OTOMASYON SCRİPTİ
 # Proje: Online Tavla (3D)
 # ============================================================================
@@ -36,7 +36,7 @@ function Bekle-Sinyal {
     foreach ($a in $agentler) {
         $sinyalDosya = "$sinyalKlasor/dalga_${dalga}_adim_${adim}_agent_${a}_tamam.txt"
         while (-not (Test-Path $sinyalDosya)) {
-            Write-Host "Agent $agentNo: Dalga $dalga - Agent $a sinyali bekleniyor..."
+            Write-Host "Agent ${agentNo}: Dalga $dalga - Agent $a sinyali bekleniyor..."
             Start-Sleep -Seconds 5
         }
     }
@@ -72,8 +72,8 @@ foreach ($dalga in 1..18) {
     }
 
     foreach ($faz in $bilgi.fazlar) {
-        Write-Host "Agent $agentNo: Faz $faz calistiriliyor..."
-        Write-Host "Agent $agentNo: Faz $faz TAMAMLANDI."
+        Write-Host "Agent ${agentNo}: Faz $faz calistiriliyor..."
+        Write-Host "Agent ${agentNo}: Faz $faz TAMAMLANDI."
         Gonder-FazSinyal -faz $faz
     }
 
@@ -81,4 +81,4 @@ foreach ($dalga in 1..18) {
     Bekle-DalgaGecis -dalga $dalga
 }
 
-Write-Host "`nAgent $agentNo: TUM DALGALAR TAMAMLANDI!"
+Write-Host "`nAgent ${agentNo}: TUM DALGALAR TAMAMLANDI!"

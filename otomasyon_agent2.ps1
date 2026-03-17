@@ -1,4 +1,4 @@
-# ============================================================================
+﻿# ============================================================================
 # AGENT 2 - OBJECT_ENGINE - OTOMASYON SCRİPTİ
 # Proje: Online Tavla (3D)
 # ============================================================================
@@ -37,10 +37,10 @@ function Bekle-Sinyal {
     foreach ($a in $agentler) {
         $sinyalDosya = "$sinyalKlasor/dalga_${dalga}_adim_${adim}_agent_${a}_tamam.txt"
         while (-not (Test-Path $sinyalDosya)) {
-            Write-Host "Agent $agentNo: Dalga $dalga - Agent $a sinyali bekleniyor..."
+            Write-Host "Agent ${agentNo}: Dalga $dalga - Agent $a sinyali bekleniyor..."
             Start-Sleep -Seconds 5
         }
-        Write-Host "Agent $agentNo: Agent $a sinyali alindi!"
+        Write-Host "Agent ${agentNo}: Agent $a sinyali alindi!"
     }
 }
 
@@ -49,7 +49,7 @@ function Gonder-Sinyal {
     if (-not (Test-Path $sinyalKlasor)) { New-Item -ItemType Directory -Path $sinyalKlasor -Force }
     $sinyalDosya = "$sinyalKlasor/dalga_${dalga}_adim_${adim}_agent_${agentNo}_tamam.txt"
     "TAMAM" | Out-File $sinyalDosya -Encoding UTF8
-    Write-Host "Agent $agentNo: Dalga $dalga Adim $adim sinyal gonderildi."
+    Write-Host "Agent ${agentNo}: Dalga $dalga Adim $adim sinyal gonderildi."
 }
 
 function Gonder-FazSinyal {
@@ -57,21 +57,21 @@ function Gonder-FazSinyal {
     if (-not (Test-Path $sinyalKlasor)) { New-Item -ItemType Directory -Path $sinyalKlasor -Force }
     $sinyalDosya = "$sinyalKlasor/faz_${faz}_tamam.txt"
     "TAMAM" | Out-File $sinyalDosya -Encoding UTF8
-    Write-Host "Agent $agentNo: Faz $faz sinyal gonderildi."
+    Write-Host "Agent ${agentNo}: Faz $faz sinyal gonderildi."
 }
 
 function Bekle-DalgaGecis {
     param([int]$dalga)
     $raporDosya = "agent6_orchestrator/dalga_gecis_raporu_${dalga}.txt"
     while (-not (Test-Path $raporDosya)) {
-        Write-Host "Agent $agentNo: Dalga $dalga gecis raporu bekleniyor..."
+        Write-Host "Agent ${agentNo}: Dalga $dalga gecis raporu bekleniyor..."
         Start-Sleep -Seconds 10
     }
     $icerik = Get-Content $raporDosya -Raw
     if ($icerik -match "GECILEBILIR") {
-        Write-Host "Agent $agentNo: Dalga $dalga GECIS ONAYLANDI!"
+        Write-Host "Agent ${agentNo}: Dalga $dalga GECIS ONAYLANDI!"
     } else {
-        Write-Host "Agent $agentNo: Dalga $dalga KOSULLU GECIS!"
+        Write-Host "Agent ${agentNo}: Dalga $dalga KOSULLU GECIS!"
     }
     return $true
 }
@@ -89,8 +89,8 @@ foreach ($dalga in 1..18) {
     }
 
     foreach ($faz in $fazlar) {
-        Write-Host "Agent $agentNo: Faz $faz calistiriliyor..."
-        Write-Host "Agent $agentNo: Faz $faz TAMAMLANDI."
+        Write-Host "Agent ${agentNo}: Faz $faz calistiriliyor..."
+        Write-Host "Agent ${agentNo}: Faz $faz TAMAMLANDI."
         Gonder-FazSinyal -faz $faz
     }
 
@@ -98,4 +98,4 @@ foreach ($dalga in 1..18) {
     Bekle-DalgaGecis -dalga $dalga
 }
 
-Write-Host "`nAgent $agentNo: TUM DALGALAR TAMAMLANDI!"
+Write-Host "`nAgent ${agentNo}: TUM DALGALAR TAMAMLANDI!"
