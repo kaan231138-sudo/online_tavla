@@ -1,0 +1,108 @@
+================================================================================
+AGENT 5 - RESEARCHER_QA - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A5-1:
+Sen Agent 5 - RESEARCHER_QA'sın. Online Tavla projesinde araştırma, test ve
+shared contracts yönetiyorsun.
+GÖREV: shared/contracts/objectRegistry.js (nesne kayıt defteri: board, point),
+shared/types/gameTypes.js (oyun tipleri: GameState, Player, Checker, Point).
+Tavla kuralları araştırma notu.
+ÇIKTI: shared/contracts/objectRegistry.js, shared/types/gameTypes.js,
+research/dalga1_arastirma.txt
+
+PROMPT A5-2:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Pul dizilim araştırması. Klasik tavla başlangıç pozisyonları,
+objectRegistry'ye checker, bar, bearoff ekle.
+ÇIKTI: shared/contracts/objectRegistry.js güncelle, research/dalga2_arastirma.txt
+
+PROMPT A5-3:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Zar olasılık araştırması. Zar kombinasyonları, çift gelme olasılığı.
+diceEngine taslak yapısı.
+ÇIKTI: research/dalga3_arastirma.txt, shared/types/gameTypes.js güncelle
+
+PROMPT A5-4:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Hamle kuralları araştırması. Geçerli hamle koşulları, zorunlu hamle
+kuralı, en fazla hamle kullanma zorunluluğu.
+ÇIKTI: research/dalga4_arastirma.txt
+
+PROMPT A5-5:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Tavla kuralları doğrulama + test senaryoları. Pul yeme, bar,
+sıra değişimi test case'leri.
+ÇIKTI: test/gameLogic.test.js, research/dalga5_arastirma.txt
+
+PROMPT A5-6:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Entegrasyon testi. Tüm bileşenlerin birlikte çalışma testi,
+hata raporu.
+ÇIKTI: test/integration.test.js, research/dalga6_hata_raporu.txt
+
+PROMPT A5-7:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Bar kuralları test + edge case araştırma. Bar'dan çıkamama durumu,
+birden fazla pul bar'da.
+ÇIKTI: test/bar.test.js, research/dalga7_arastirma.txt
+
+PROMPT A5-8:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Toplama kuralları test. Büyük zar ile küçük point'ten toplama,
+toplama sırası kuralları.
+ÇIKTI: test/bearoff.test.js, research/dalga8_arastirma.txt
+
+PROMPT A5-9:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Skor sistemi test + doğrulama. Mars, tek, gammon hesaplama doğruluğu.
+ÇIKTI: test/scoring.test.js
+
+PROMPT A5-10:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Socket.IO araştırma + API tasarımı. Event isimleri, payload yapıları,
+oda yönetimi API.
+ÇIKTI: research/dalga10_arastirma.txt, shared/types/gameTypes.js güncelle
+
+PROMPT A5-11:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Socket güvenlik + auth middleware. XSS koruması, rate limiting,
+token doğrulama.
+ÇIKTI: middleware/authMiddleware.js, middleware/socketSecurity.js
+
+PROMPT A5-12:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Online entegrasyon testi. İki oyunculu senaryo, gecikme simülasyonu.
+ÇIKTI: test/online.test.js
+
+PROMPT A5-13:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Ses dosyaları araştırma + lisans kontrol. Ücretsiz ses efektleri kaynakları.
+ÇIKTI: research/dalga13_arastirma.txt
+
+PROMPT A5-14:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: State management test. Snapshot kaydetme/yükleme, undo doğruluğu.
+ÇIKTI: test/state.test.js
+
+PROMPT A5-15:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Özel durum test senaryoları. Çift zar, hamle yapamama, zorunlu hamle.
+ÇIKTI: test/specialCases.test.js
+
+PROMPT A5-16:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Sohbet güvenlik + filtre. Küfür filtresi, spam koruması, mesaj uzunluk limiti.
+ÇIKTI: middleware/socketSecurity.js güncelle
+
+PROMPT A5-17:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Veritabanı şema + test. Oyuncu tablosu, oyun geçmişi, sıralama.
+ÇIKTI: research/dalga17_db_sema.txt, test/db.test.js
+
+PROMPT A5-18:
+Sen Agent 5 - RESEARCHER_QA'sın.
+GÖREV: Final QA + yayın raporu. Tüm testleri çalıştır, hata listesi,
+yayın hazırlık raporu.
+ÇIKTI: test/final.test.js, research/yayin_raporu.txt

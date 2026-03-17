@@ -1,0 +1,9 @@
+================================================================================
+🎲 ONLINE TAVLA - AGENT KOORDİNASYON LOGU
+================================================================================
+Bu dosya Agent 6 - ORCHESTRATOR tarafından yönetilir.
+Tüm dalga geçişleri ve agent koordinasyonu burada loglanır.
+
+--- Proje Başlangıcı ---
+Durum: Yapı oluşturuldu, Dalga 1 bekleniyor.
+================================================================================

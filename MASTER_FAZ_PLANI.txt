@@ -1,0 +1,166 @@
+================================================================================
+🎲 ONLINE TAVLA - MASTER FAZ PLANI (18 DALGA)
+================================================================================
+
+DALGA 1: TEMEL SAHNE + TAHTA + ÜÇGENLER + İLK UI
+  Agent 1 (A1-1): Three.js sahne kurulumu, kamera, renderer, ışık
+  Agent 2 (A2-1): Tavla tahtası modeli (board) + üçgenler (point)
+  Agent 3 (A3-1): Üst bar (oyuncu bilgileri, skor) + temel CSS
+  Agent 4 (A4-1): Kamera kontrolleri (pan, zoom, rotate kapalı)
+  Agent 5 (A5-1): objectRegistry + gameTypes + araştırma notu
+  Agent 6 (A6-1): Dalga 1 denetim + geçiş raporu
+  Adım: 1(1,2,3,5) → 2(4)
+
+DALGA 2: PULLAR + BAR + TOPLAMA BÖLGESİ
+  Agent 1 (A1-2): Sahneye pul/bar/bearoff entegrasyonu
+  Agent 2 (A2-2,A2-3): Pul modeli (checker) + bar + bearoff modeli
+  Agent 3 (A3-2): Pul sayacı UI + bar göstergesi
+  Agent 4 (A4-2): Pul seçim sistemi (raycaster)
+  Agent 5 (A5-2): Pul dizilim araştırması + registry güncelle
+  Agent 6 (A6-2): Dalga 2 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 3: ZARLAR + ZAR ATMA MEKANİĞİ
+  Agent 1 (A1-3): Sahneye zar entegrasyonu
+  Agent 2 (A2-4): Zar modeli (dice) + border modeli
+  Agent 3 (A3-3): Zar paneli UI + "Zar At" butonu
+  Agent 4 (A4-3): Zar fırlatma animasyonu (GSAP)
+  Agent 5 (A5-3): Zar olasılık araştırması + diceEngine taslak
+  Agent 6 (A6-3): Dalga 3 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 4: PUL TAŞIMA + HEDEF GÖSTERME
+  Agent 1 (A1-4): Sahne güncelleme döngüsü optimizasyonu
+  Agent 2 (A2-5): Üçgen highlight modeli (yeşil/kırmızı)
+  Agent 3 (A3-4): Hamle göstergesi UI + seçim bilgisi
+  Agent 4 (A4-4): Pul taşıma + hedef üçgen highlight + GSAP kayma
+  Agent 5 (A5-4): Hamle kuralları araştırması + moveValidator taslak
+  Agent 6 (A6-4): Dalga 4 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 5: OYUN MANTIĞI - SIRA + HAMLE DOĞRULAMA + PUL YEME
+  Agent 1 (A1-5): Game loop entegrasyonu
+  Agent 2 (A2-6): Yenen pul bar animasyon modeli
+  Agent 3 (A3-5): Sıra göstergesi UI + bildirim sistemi
+  Agent 4 (A4-5): turnManager + moveValidator + pul yeme mekaniği
+  Agent 5 (A5-5): Tavla kuralları doğrulama + test senaryoları
+  Agent 6 (A6-5): Dalga 5 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 6: ENTEGRASYON + HATA DÜZELTME + POLISH
+  Agent 1 (A1-6): Sahne performans optimizasyonu
+  Agent 2 (A2-7): Model polish + renk/boyut ince ayar
+  Agent 3 (A3-6): UI polish + responsive düzenleme
+  Agent 4 (A4-6): Animasyon polish + bug fix
+  Agent 5 (A5-6): Entegrasyon testi + hata raporu
+  Agent 6 (A6-6): Dalga 6 denetim (ara milestone)
+  Adım: 1(1,2,3,4,5) → herkes paralel
+
+DALGA 7: BAR MEKANİĞİ + BAR'DAN ÇIKIŞ
+  Agent 1 (A1-7): Bar bölgesi sahne düzenlemesi
+  Agent 2 (A2-8): Bar pul istif modeli
+  Agent 3 (A3-7): Bar durumu UI göstergesi
+  Agent 4 (A4-7): Bar'dan çıkış mekaniği + zorunlu hamle
+  Agent 5 (A5-7): Bar kuralları test + edge case araştırma
+  Agent 6 (A6-7): Dalga 7 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 8: TOPLAMA MEKANİĞİ + OYUN SONU
+  Agent 1 (A1-8): Toplama bölgesi sahne düzenlemesi
+  Agent 2 (A2-9): Toplama animasyon modeli
+  Agent 3 (A3-8): Toplama durumu UI + oyun sonu ekranı
+  Agent 4 (A4-8): Toplama mekaniği + oyun sonu tespiti
+  Agent 5 (A5-8): Toplama kuralları test
+  Agent 6 (A6-8): Dalga 8 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 9: MARS/TEK KAZANMA + SKOR SİSTEMİ
+  Agent 1 (A1-9): Skor sahne efektleri
+  Agent 2 (A2-10): Zafer animasyon modeli
+  Agent 3 (A3-9): Skor tablosu UI + mars göstergesi
+  Agent 4 (A4-9): Mars/tek hesaplama + skor kayıt
+  Agent 5 (A5-9): Skor sistemi test + doğrulama
+  Agent 6 (A6-9): Dalga 9 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 10: LOBBY UI + ODA SİSTEMİ
+  Agent 1 (A1-10): Server.js temel yapı
+  Agent 2 (A2-11): Lobby dekoratif 3D elemanlar
+  Agent 3 (A3-10): Lobby ekranı: oda listesi, oluştur, katıl
+  Agent 4 (A4-10): Lobby etkileşim + oda seçimi
+  Agent 5 (A5-10): Socket.IO araştırma + API tasarımı
+  Agent 6 (A6-10): Dalga 10 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 11: SOCKET.IO SUNUCU + GERÇEK ZAMANLI BAĞLANTI
+  Agent 1 (A1-11): Socket.IO sunucu entegrasyonu
+  Agent 2 (A2-12): Online durum gösterge modeli
+  Agent 3 (A3-11): Bağlantı durumu UI + bekleme ekranı
+  Agent 4 (A4-11): Online hamle senkronizasyonu
+  Agent 5 (A5-11): Socket güvenlik + auth middleware
+  Agent 6 (A6-11): Dalga 11 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 12: ENTEGRASYON + ONLINE TEST + POLISH
+  Agent 1 (A1-12): Sunucu optimizasyonu
+  Agent 2 (A2-13): Model final polish
+  Agent 3 (A3-12): UI final polish + responsive
+  Agent 4 (A4-12): Online oyun test + bug fix
+  Agent 5 (A5-12): Online entegrasyon testi
+  Agent 6 (A6-12): Dalga 12 denetim (ara milestone)
+  Adım: 1(1,2,3,4,5) → herkes paralel
+
+DALGA 13: GELİŞMİŞ ZAR ANİMASYONU + SES EFEKTLERİ
+  Agent 1 (A1-13): Ses sistemi entegrasyonu
+  Agent 2 (A2-14): Gelişmiş zar fizik modeli
+  Agent 3 (A3-13): Ses kontrol UI + ayarlar paneli
+  Agent 4 (A4-13): Zar fizik animasyonu + ses tetikleme
+  Agent 5 (A5-13): Ses dosyaları araştırma + lisans kontrol
+  Agent 6 (A6-13): Dalga 13 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 14: HAMLE GEÇMİŞİ + GERİ ALMA
+  Agent 1 (A1-14): Durum yönetimi (state management)
+  Agent 2 (A2-15): Geri alma animasyon modeli
+  Agent 3 (A3-14): Hamle geçmişi paneli UI
+  Agent 4 (A4-14): Undo mekaniği + hamle kaydı
+  Agent 5 (A5-14): State management test
+  Agent 6 (A6-14): Dalga 14 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 15: ÇİFT ZAR KURALLARI + ÖZEL DURUMLAR
+  Agent 1 (A1-15): Özel durum sahne efektleri
+  Agent 2 (A2-16): Çift zar vurgu modeli
+  Agent 3 (A3-15): Çift zar UI göstergesi + kural bilgisi
+  Agent 4 (A4-15): Çift zar 4 hamle + hamle yapamama durumu
+  Agent 5 (A5-15): Özel durum test senaryoları
+  Agent 6 (A6-15): Dalga 15 denetim
+  Adım: 1(2,5) → 2(1,3) → 3(4)
+
+DALGA 16: SOHBET SİSTEMİ + EMOJİ
+  Agent 1 (A1-16): Sohbet socket entegrasyonu
+  Agent 2 (A2-17): Sohbet balonu 3D modeli (opsiyonel)
+  Agent 3 (A3-16): Sohbet paneli UI + emoji picker
+  Agent 4 (A4-16): Sohbet etkileşim + emoji gönderme
+  Agent 5 (A5-16): Sohbet güvenlik + filtre
+  Agent 6 (A6-16): Dalga 16 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 17: SIRALAMA + İSTATİSTİK + PROFİL
+  Agent 1 (A1-17): Veritabanı entegrasyonu
+  Agent 2 (A2-18): Profil avatar 3D modeli
+  Agent 3 (A3-17): Sıralama tablosu + profil sayfası UI
+  Agent 4 (A4-17): Profil etkileşim + istatistik görüntüleme
+  Agent 5 (A5-17): Veritabanı şema + test
+  Agent 6 (A6-17): Dalga 17 denetim
+  Adım: 1(2,3,5) → 2(1) → 3(4)
+
+DALGA 18: FİNAL ENTEGRASYON + PERFORMANS + YAYIN
+  Agent 1 (A1-18): Performans optimizasyonu + deploy
+  Agent 2 (A2-19,A2-20): Tüm model final review + fix
+  Agent 3 (A3-18): UI final review + erişilebilirlik
+  Agent 4 (A4-18): Tüm etkileşim final test
+  Agent 5 (A5-18): Final QA + yayın raporu
+  Agent 6 (A6-18): Final denetim + yayın onayı
+  Adım: 1(1,2,3,4,5) → herkes paralel
+================================================================================

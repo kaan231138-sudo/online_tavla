@@ -1,0 +1,12 @@
+{
+    "name": "point",
+    "description": "Üçgenler (24 adet, siyah/krem dönüşümlü)",
+    "count": 24,
+    "dimensions": { "baseWidth": 1.0, "height": 4.0, "depth": 0.05 },
+    "colors": {
+        "dark": "#1A1A1A",
+        "light": "#F5E6C8",
+        "highlightValid": "#00FF00",
+        "highlightInvalid": "#FF0000"
+    }
+}

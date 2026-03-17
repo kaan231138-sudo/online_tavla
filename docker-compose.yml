@@ -1,0 +1,10 @@
+# Online Tavla - Docker Compose
+# TODO: Dalga 18 - A1-18 fazında implement edilecek
+version: '3.8'
+services:
+  tavla-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production

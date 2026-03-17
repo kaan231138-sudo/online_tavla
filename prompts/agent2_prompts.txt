@@ -1,0 +1,125 @@
+================================================================================
+AGENT 2 - OBJECT_ENGINE - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A2-1:
+Sen Agent 2 - OBJECT_ENGINE'sin. Online Tavla projesinde 3D nesne modelleri oluşturuyorsun.
+GÖREV: Tavla tahtası (objects/board/) ve üçgenler (objects/point/) modellerini oluştur.
+Tahta: BoxGeometry, koyu kahve + açık kahve. Üçgenler: 24 adet, siyah/krem dönüşümlü.
+Her nesne için model.js + config.json oluştur. js/objectLoader.js'i güncelle.
+ÇIKTI: objects/board/model.js, objects/board/config.json,
+objects/point/model.js, objects/point/config.json, js/objectLoader.js
+
+PROMPT A2-2:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Pul modeli (objects/checker/). CylinderGeometry, siyah + beyaz,
+parlak yüzey. 30 adet (15 siyah, 15 beyaz). Başlangıç dizilimi config'de.
+ÇIKTI: objects/checker/model.js, objects/checker/config.json
+
+PROMPT A2-3:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Bar modeli (objects/bar/) + toplama bölgesi (objects/bearoff/).
+Bar: Tahtanın ortasındaki dikey bölme. Bearoff: Yan taraftaki toplama alanı.
+ÇIKTI: objects/bar/model.js, objects/bar/config.json,
+objects/bearoff/model.js, objects/bearoff/config.json
+
+PROMPT A2-4:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Zar modeli (objects/dice/) + kenar çerçeve (objects/border/).
+Zar: Küp, beyaz, siyah noktalı, yuvarlatılmış köşe. Border: Tahta kenarı dekoratif.
+ÇIKTI: objects/dice/model.js, objects/dice/config.json,
+objects/border/model.js, objects/border/config.json
+
+PROMPT A2-5:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Üçgen highlight modeli. Seçilebilir üçgenleri yeşil, seçilemezleri
+kırmızı gösteren overlay mesh.
+ÇIKTI: objects/point/model.js güncelle (highlight fonksiyonu ekle)
+
+PROMPT A2-6:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Yenen pulun bar'a gitme animasyonu için ara pozisyon modeli.
+ÇIKTI: objects/checker/model.js güncelle
+
+PROMPT A2-7:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Tüm modellerin renk, boyut, pozisyon ince ayarı. Tutarlılık kontrolü.
+ÇIKTI: Tüm config.json dosyaları güncelle
+
+PROMPT A2-8:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Bar pul istif modeli. Bar'da birden fazla pul olduğunda üst üste
+dizilme görünümü.
+ÇIKTI: objects/bar/model.js güncelle
+
+PROMPT A2-9:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Toplama animasyon modeli. Pulun tahtadan çıkıp toplama bölgesine
+gitmesi için animasyon pozisyonları.
+ÇIKTI: objects/bearoff/model.js güncelle
+
+PROMPT A2-10:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Zafer animasyon modeli. Kazanma anında pulların havaya uçması efekti.
+ÇIKTI: objects/checker/model.js güncelle (victory animasyon)
+
+PROMPT A2-11:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Lobby dekoratif 3D elemanlar. Arka planda dönen zar, tavla tahtası
+silueti gibi dekoratif objeler.
+ÇIKTI: objects/lobby/ klasörü oluştur
+
+PROMPT A2-12:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Online durum gösterge modeli. Oyuncunun online/offline durumunu
+gösteren küçük 3D ışık göstergesi.
+ÇIKTI: objects/indicator/ klasörü oluştur
+
+PROMPT A2-13:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Tüm modellerin final polish. Geometry optimize, material tutarlılık.
+ÇIKTI: Tüm model.js dosyaları güncelle
+
+PROMPT A2-14:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Gelişmiş zar fizik modeli. Zar yüzey detayı, nokta derinliği,
+yuvarlanma fizik parametreleri.
+ÇIKTI: objects/dice/model.js güncelle
+
+PROMPT A2-15:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Geri alma animasyon modeli. Pulun geri gitme animasyonu için
+ters yön pozisyon hesaplama.
+ÇIKTI: objects/checker/model.js güncelle
+
+PROMPT A2-16:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Çift zar vurgu modeli. Çift geldiğinde zarların etrafında
+parlama efekti.
+ÇIKTI: objects/dice/model.js güncelle
+
+PROMPT A2-17:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Sohb
+et balonu 3D modeli (opsiyonel). Mesaj gönderildiğinde tahta üstünde
+kısa süreli görünen konuşma balonu.
+ÇIKTI: objects/chatbubble/ klasörü oluştur
+
+PROMPT A2-18:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Profil avatar 3D modeli. Oyuncu avatarı olarak kullanılacak
+basit 3D figür/ikon.
+ÇIKTI: objects/avatar/ klasörü oluştur
+
+PROMPT A2-19:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: Tüm modellerin final review. Polygon sayısı kontrolü, material
+tutarlılık, config doğrulama.
+ÇIKTI: Tüm model dosyaları review + fix
+
+PROMPT A2-20:
+Sen Agent 2 - OBJECT_ENGINE'sin.
+GÖREV: objectLoader.js final güncelleme. Tüm nesnelerin doğru yüklendiğini
+kontrol et, lazy loading ekle.
+ÇIKTI: js/objectLoader.js final güncelle

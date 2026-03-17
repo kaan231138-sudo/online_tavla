@@ -1,0 +1,111 @@
+================================================================================
+AGENT 3 - UI_DESIGNER - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A3-1:
+Sen Agent 3 - UI_DESIGNER'sın. Online Tavla projesinde HTML/Tailwind arayüz tasarlıyorsun.
+GÖREV: css/ui.css temel stiller, js/ui/topBar.js (üst bar: oyuncu adları, skor, süre).
+Renk paleti: koyu kahve (#2C1810), altın (#D4A843), krem (#F5E6C8).
+ÇIKTI: css/ui.css, js/ui/topBar.js
+
+PROMPT A3-2:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Pul sayacı UI. Her iki oyuncunun kaç pulu tahtada, bar'da, toplamada
+olduğunu gösteren kompakt gösterge.
+ÇIKTI: js/ui/topBar.js güncelle
+
+PROMPT A3-3:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Zar paneli UI. Zar sonuçlarını gösteren panel + "Zar At" butonu.
+Kullanılmış zarlar soluk, kullanılmamışlar parlak.
+ÇIKTI: js/ui/dicePanel.js oluştur
+
+PROMPT A3-4:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Hamle göstergesi UI. Seçili pul bilgisi, gidebileceği yerler,
+kalan hamle sayısı.
+ÇIKTI: js/ui/detailPanel.js oluştur
+
+PROMPT A3-5:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Sıra göstergesi UI + bildirim sistemi. Kimin sırası olduğunu
+belirgin şekilde göster. Pul yeme, geçersiz hamle bildirimleri.
+ÇIKTI: js/ui/notifications.js oluştur, js/ui/topBar.js güncelle
+
+PROMPT A3-6:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: UI polish + responsive düzenleme. Mobil uyum, font boyutları,
+buton boyutları, genel görsel tutarlılık.
+ÇIKTI: css/ui.css, tüm js/ui/ dosyaları güncelle
+
+PROMPT A3-7:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Bar durumu UI göstergesi. Bar'da bekleyen pul sayısını ve
+bar'dan çıkış zorunluluğunu gösteren uyarı.
+ÇIKTI: js/ui/topBar.js güncelle
+
+PROMPT A3-8:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Toplama durumu UI + oyun sonu ekranı. Toplama moduna geçildiğinde
+bilgi, oyun bittiğinde sonuç ekranı (kazanan, skor, tekrar oyna).
+ÇIKTI: js/ui/detailPanel.js güncelle
+
+PROMPT A3-9:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Skor tablosu UI + mars göstergesi. Maç skoru, mars/tek bilgisi.
+ÇIKTI: js/ui/topBar.js güncelle
+
+PROMPT A3-10:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Lobby ekranı. Oda listesi (oda adı, oyuncu sayısı, durum),
+"Oda Oluştur" butonu, "Katıl" butonu, oyuncu adı girişi.
+ÇIKTI: js/ui/lobby.js oluştur
+
+PROMPT A3-11:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Bağlantı durumu UI + bekleme ekranı. Online/offline göstergesi,
+rakip bekleme ekranı, bağlantı kopma uyarısı.
+ÇIKTI: js/ui/lobby.js güncelle, js/ui/notifications.js güncelle
+
+PROMPT A3-12:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: UI final polish + responsive. Tüm ekranların mobil uyumu,
+tablet uyumu, genel görsel tutarlılık.
+ÇIKTI: css/ui.css, tüm js/ui/ dosyaları güncelle
+
+PROMPT A3-13:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Ses kontrol UI + ayarlar paneli. Ses açma/kapama, ses seviyesi
+slider, müzik/efekt ayrı kontrol.
+ÇIKTI: js/ui/settings.js oluştur
+
+PROMPT A3-14:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Hamle geçmişi paneli UI. Yapılan hamlelerin listesi, zar sonuçları,
+geri alma butonu.
+ÇIKTI: js/ui/detailPanel.js güncelle
+
+PROMPT A3-15:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Çift zar UI göstergesi + kural bilgisi. Çift geldiğinde özel
+görsel vurgu, 4 hamle hakkı bilgisi.
+ÇIKTI: js/ui/dicePanel.js güncelle
+
+PROMPT A3-16:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Sohbet paneli UI + emoji picker. Sağ tarafta açılır sohbet paneli,
+emoji seçici, mesaj geçmişi.
+ÇIKTI: js/ui/chat.js oluştur
+
+PROMPT A3-17:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: Sıralama tablosu + profil sayfası UI. Liderboard, oyuncu profili
+(kazanma oranı, toplam oyun, favori açılış).
+ÇIKTI: js/ui/leaderboard.js oluştur, js/ui/profile.js oluştur
+
+PROMPT A3-18:
+Sen Agent 3 - UI_DESIGNER'sın.
+GÖREV: UI final review + erişilebilirlik. ARIA etiketleri, kontrast oranları,
+klavye navigasyonu, screen reader uyumu.
+ÇIKTI: Tüm UI dosyaları güncelle

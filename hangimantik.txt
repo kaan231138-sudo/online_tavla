@@ -1,0 +1,527 @@
+================================================================================
+🎮 OYUN ŞABLON MANTIĞI - HERHANGİ BİR OYUNA UYARLANABİLİR REFERANS DOKÜMANI
+================================================================================
+Bu dosya, 6-agent otomasyon sistemiyle HERHANGİ bir 3D online oyun projesi
+oluşturmak için kullanılır. Oyun adını, nesnelerini, kurallarını değiştirip
+bu şablona oturtarak komple proje iskeleti çıkarabilirsin.
+
+ÖRNEK: Bu mantıkla tavla yapıldı. Aynı mantıkla okey, satranç, pişti,
+batak, king, mangala, dama, bilardo, bowling... her şey yapılabilir.
+
+================================================================================
+BÖLÜM 1: PROJE KİMLİĞİ (OYUNA GÖRE DEĞİŞTİR)
+================================================================================
+
+Bu kısımları kendi oyununa göre doldur:
+
+  PROJE ADI:        _______________  (örn: Online Tavla, Online Okey)
+  KLASÖR ADI:       _______________  (örn: online_tavla, online_okey)
+  OYUN TÜRÜ:        _______________  (masa oyunu / kart oyunu / strateji)
+  OYUNCU SAYISI:    _______________  (2 / 4 / 2-6 arası)
+  ONLINE MI:        Evet / Hayır
+  3D Mİ 2D Mİ:     3D (Three.js) / 2D (Canvas)
+
+================================================================================
+BÖLÜM 2: SABİT TEKNOLOJİ STACK (HİÇ DEĞİŞMEZ)
+================================================================================
+
+  TEKNOLOJİ: Three.js + Tailwind CSS + GSAP + Vanilla JS
+  FRAMEWORK: React/Vue/Angular YASAK. Sadece CDN üzerinden.
+  ONLINE:    Socket.IO ile gerçek zamanlı çok oyunculu
+  SUNUCU:    Node.js + Express + Socket.IO
+  DEPLOY:    Docker + Nginx
+
+  KRİTİK TEKNİK KURALLAR (her projede aynı):
+    1. renderer.shadowMap.enabled = false
+    2. renderer.setPixelRatio(1)
+    3. renderer.setClearColor(ARKA_PLAN_RENGİ)
+    4. window.onload KULLANMA! init() anında tetikle
+    5. Düşük polygon sayısı (mobil uyum)
+    6. OrbitControls: enableRotate = false (veya oyuna göre aç)
+
+================================================================================
+BÖLÜM 3: NESNE LİSTESİ ÇIKARMA (EN ÖNEMLİ ADIM)
+================================================================================
+
+Her oyunun kendine özgü nesneleri var. Bunları listele ve her birine
+klasör aç. KURAL: HER NESNE = AYRI KLASÖR + AYRI KOD
+
+  objects/<nesne_adi>/
+    ├── model.js      → 3D geometri + mesh
+    ├── config.json    → Boyut, renk, pozisyon parametreleri
+    └── interact.js    → Tıklama, sürükleme, seçim mantığı
+
+NASIL LİSTELERSİN:
+  1. Oyunu kafanda canlandır
+  2. Masada/ekranda NE GÖRÜYORSUN? Her gördüğün şey = 1 nesne
+  3. Oyuncunun etkileştiği her şey interact.js gerektirir
+  4. Sadece dekoratif olanlar interact.js gerektirmez
+
+ÖRNEK NESNE LİSTELERİ:
+
+  TAVLA:
+    board (tahta), point (üçgen), checker (pul), dice (zar),
+    bar (orta bölme), bearoff (toplama), border (çerçeve)
+
+  OKEY:
+    table (masa), rack (istaka), tile (taş), indicator (gösterge taşı),
+    center (orta havuz), discard (atma alanı), border (masa kenarı)
+
+  SATRANÇ:
+    board (tahta), square (kare), pawn/rook/knight/bishop/queen/king (taşlar),
+    capturedArea (yenen taşlar), border (çerçeve)
+
+  PİŞTİ:
+    table (masa), card (kart), deck (deste), pile (orta yığın),
+    scoreArea (kazanılan kartlar), border (çerçeve)
+
+  GENEL FORMÜL:
+    1. Ana yüzey     → board / table / masa
+    2. Oyun taşları   → checker / tile / card / piece
+    3. Özel bölgeler  → bar / rack / pile / capturedArea
+    4. Rastgelelik     → dice / deck (zar veya deste)
+    5. Dekorasyon     → border / indicator / frame
+
+================================================================================
+BÖLÜM 4: OYUN KURALLARI TANIMLAMA
+================================================================================
+
+Oyunun kurallarını şu formatta yaz (AI'lar bunu okuyup kodlayacak):
+
+  BAŞLANGIÇ DİZİLİMİ:
+    → Oyun başında nesneler nerede duruyor?
+    → Kaç tane, hangi renk/tip, hangi pozisyonda?
+
+  SIRA SİSTEMİ:
+    → Kaç oyuncu, sıra nasıl dönüyor?
+    → Zar mı atılıyor, kart mı çekiliyor?
+
+  HAMLE KURALLARI:
+    → Oyuncu ne yapabilir? (taş taşıma, kart atma, taş çekme)
+    → Hangi hamleler geçerli, hangileri yasak?
+    → Zorunlu hamle var mı?
+
+  ÖZEL DURUMLAR:
+    → Çift zar, okey, şah çekme, pişti gibi özel anlar
+    → Bu anlarda ne oluyor? (ekstra hamle, puan, vs.)
+
+  KAZANMA KOŞULU:
+    → Oyun nasıl bitiyor?
+    → Skor nasıl hesaplanıyor?
+    → Bonus/ceza var mı? (mars, gammon, mat, vs.)
+
+================================================================================
+BÖLÜM 5: 6 AGENT SİSTEMİ (HİÇ DEĞİŞMEZ)
+================================================================================
+
+Agent yapısı HER PROJEDE AYNI. Sadece içerik değişir.
+
+  Agent 1 - SCENE_MASTER:
+    NE YAPAR: Three.js sahne, kamera, renderer, ışık, server.js
+    DOSYALARI: index.html, js/scene.js, js/camera.js, js/renderer.js,
+               js/lights.js, js/main.js, server.js
+
+  Agent 2 - OBJECT_ENGINE:
+    NE YAPAR: 3D nesne modelleri (her nesne kendi klasöründe)
+    DOSYALARI: objects/*/model.js, objects/*/config.json, js/objectLoader.js
+
+  Agent 3 - UI_DESIGNER:
+    NE YAPAR: HTML/Tailwind arayüz (üst bar, paneller, lobby)
+    DOSYALARI: css/ui.css, js/ui/*.js
+
+  Agent 4 - INTERACTION:
+    NE YAPAR: Tıklama, seçim, animasyon, oyun mekaniği
+    DOSYALARI: js/interaction/*.js, objects/*/interact.js, js/game/*.js
+
+  Agent 5 - RESEARCHER_QA:
+    NE YAPAR: Araştırma, test, shared contracts, dokümantasyon
+    DOSYALARI: shared/*, test/*, research/*, middleware/*
+
+  Agent 6 - ORCHESTRATOR:
+    NE YAPAR: Denetim, dalga geçiş onayı (KOD YAZMAZ!)
+    DOSYALARI: agent6_orchestrator/*.txt, AGENT_KOORDINASYON_LOGU.txt
+
+================================================================================
+BÖLÜM 6: DOSYA SAHİPLİĞİ ŞABLONU (OYUNA GÖRE DOLDUR)
+================================================================================
+
+  Agent 1: index.html, js/scene.js, js/camera.js, js/renderer.js,
+           js/lights.js, js/main.js, server.js, dbConfig.js
+  Agent 2: objects/___/model.js, objects/___/config.json (her nesne),
+           js/objectLoader.js
+  Agent 3: css/ui.css, js/ui/topBar.js, js/ui/___Panel.js,
+           js/ui/notifications.js, js/ui/lobby.js
+  Agent 4: js/interaction/raycaster.js, js/interaction/selection.js,
+           js/interaction/cameraControls.js, js/interaction/animations.js,
+           objects/*/interact.js, js/game/moveValidator.js
+  Agent 5: shared/contracts/objectRegistry.js, shared/types/gameTypes.js,
+           research/*.txt, test/*.js, middleware/*.js
+  Agent 6: agent6_orchestrator/*.txt, AGENT_KOORDINASYON_LOGU.txt
+
+  ORTAK (Agent 4 + 5):
+    js/game/gameLogic.js, js/game/turnManager.js,
+    js/game/moveValidator.js, js/game/___Engine.js
+    (___Engine = diceEngine, deckEngine, tileEngine... oyuna göre)
+
+================================================================================
+BÖLÜM 7: 18 DALGA ŞABLONU (OYUNA GÖRE İÇERİK DEĞİŞİR, YAPI AYNI)
+================================================================================
+
+Dalgalar 3 BLOK halinde ilerler (her blok 6 dalga):
+
+  BLOK 1 (Dalga 1-6): OFFLINE OYUN
+    Dalga 1:  Sahne + ana yüzey + temel UI
+    Dalga 2:  Oyun taşları + özel bölgeler
+    Dalga 3:  Rastgelelik aracı (zar/deste) + animasyon
+    Dalga 4:  Taş seçme + hedef gösterme + taşıma
+    Dalga 5:  Oyun mantığı: sıra, hamle doğrulama, özel aksiyonlar
+    Dalga 6:  ENTEGRASYON + hata düzeltme (ARA MİLESTONE)
+
+  BLOK 2 (Dalga 7-12): ONLINE ALTYAPI
+    Dalga 7:  Özel bölge mekaniği (bar/rack/pile detayları)
+    Dalga 8:  Oyun sonu mekaniği + kazanma tespiti
+    Dalga 9:  Skor sistemi + bonus/ceza hesaplama
+    Dalga 10: Lobby UI + oda sistemi
+    Dalga 11: Socket.IO sunucu + gerçek zamanlı bağlantı
+    Dalga 12: ENTEGRASYON + online test (ARA MİLESTONE)
+
+  BLOK 3 (Dalga 13-18): GELİŞMİŞ ÖZELLİKLER
+    Dalga 13: Gelişmiş animasyon + ses efektleri
+    Dalga 14: Hamle geçmişi + geri alma
+    Dalga 15: Özel kurallar + edge case'ler
+    Dalga 16: Sohbet sistemi + emoji
+    Dalga 17: Sıralama + istatistik + profil
+    Dalga 18: FİNAL ENTEGRASYON + performans + yayın
+
+================================================================================
+BÖLÜM 8: DALGA ADIM YAPISI (HİÇ DEĞİŞMEZ)
+================================================================================
+
+Her dalgada agent'lar belirli bir sırayla çalışır.
+Bu sıra HER PROJEDE AYNI:
+
+  BLOK 1+2 İÇ DALGALAR (1,7,13 hariç):
+    Tip A (Dalga 2,3,7,8,9,13,14,15):
+      Adım1(2,5) → Adım2(1,3) → Adım3(4)
+      Önce model + araştırma, sonra sahne + UI, en son etkileşim
+
+    Tip B (Dalga 4,5,10,11,16,17):
+      Adım1(2,3,5) → Adım2(1) → Adım3(4)
+      Önce model + UI + araştırma, sonra sahne, en son etkileşim
+
+    Tip C (Dalga 1):
+      Adım1(1,2,3,5) → Adım2(4)
+      İlk dalga: herkes paralel, sadece etkileşim bekler
+
+    Tip D (Dalga 6,12,18):
+      Adım1(1,2,3,4,5) → herkes paralel
+      Entegrasyon dalgaları: herkes kendi işini yapar
+
+  ÖZET TABLO:
+    Dalga 1:  C  | Dalga 7:  A  | Dalga 13: A
+    Dalga 2:  A  | Dalga 8:  A  | Dalga 14: A
+    Dalga 3:  A  | Dalga 9:  A  | Dalga 15: A
+    Dalga 4:  B  | Dalga 10: B  | Dalga 16: B
+    Dalga 5:  B  | Dalga 11: B  | Dalga 17: B
+    Dalga 6:  D  | Dalga 12: D  | Dalga 18: D
+
+================================================================================
+BÖLÜM 9: SİNYAL SİSTEMİ (HİÇ DEĞİŞMEZ)
+================================================================================
+
+Agent'lar birbirini dosya tabanlı sinyallerle bekler:
+
+  ADIM SİNYALİ:
+    sinyaller/dalga_X_adim_Y_agent_Z_tamam.txt
+    → Agent Z, Dalga X'in Y. adımını tamamladı
+
+  FAZ SİNYALİ:
+    sinyaller/faz_AX-Y_tamam.txt
+    → Agent X'in Y numaralı fazı tamamlandı
+
+  DALGA GEÇİŞ RAPORU:
+    agent6_orchestrator/dalga_gecis_raporu_X.txt
+    → Agent 6'nın Dalga X denetim sonucu
+    → İçinde: GECILEBILIR veya KOSULLU GECIS ZORUNLU
+
+  AKIŞ:
+    1. Agent görevi tamamlar → faz sinyali gönderir
+    2. Agent adımı tamamlar → adım sinyali gönderir
+    3. Sonraki adımdaki agent'lar önceki sinyalleri bekler
+    4. Tüm adımlar bitince Agent 6 denetler
+    5. Agent 6 geçiş raporu yazar → sonraki dalga başlar
+
+================================================================================
+BÖLÜM 10: OTOMASYON SCRİPT YAPISI (HİÇ DEĞİŞMEZ)
+================================================================================
+
+Her agent için 1 PowerShell scripti + 1 master script:
+
+  AGENT 1-5 SCRİPT YAPISI:
+    $tumFazlar = @("AX-1","AX-2",...,"AX-N")
+    $dalgaAdimFaz = @{
+        DalgaNo = @{
+            adim   = AdımNumarası
+            fazlar = @("AX-Y")        # Bu dalgada çalışacak fazlar
+            bekle  = @(agent_no'lar)   # Önceki adımda bitmesi gereken agent'lar
+        }
+    }
+
+  AGENT 6 SCRİPT YAPISI (FARKLI!):
+    $dalgaAdimHaritasi = @{
+        DalgaNo = @{
+            AdımNo = @(agent_no'lar)   # Bu adımda çalışan agent'lar
+        }
+    }
+    $dalgaFazlari = @{
+        DalgaNo = "A6-X"              # Agent 6'nın bu dalgadaki fazı
+    }
+
+  MASTER SCRİPT:
+    - Sinyal klasörünü temizler
+    - 6 agent'ı Start-Job ile paralel başlatır
+    - Wait-Job ile hepsinin bitmesini bekler
+
+  FONKSİYONLAR (her scriptte aynı):
+    Bekle-Sinyal:      Belirtilen agent'ların sinyalini bekler
+    Gonder-Sinyal:     Kendi adım sinyalini gönderir
+    Gonder-FazSinyal:  Kendi faz sinyalini gönderir
+    Bekle-DalgaGecis:  Agent 6'nın geçiş raporunu bekler
+
+================================================================================
+BÖLÜM 11: PROMPT DOSYASI YAPISI (İÇERİK DEĞİŞİR, FORMAT AYNI)
+================================================================================
+
+Her agent için 1 prompt dosyası: prompts/agentX_prompts.txt
+
+  FORMAT:
+    PROMPT AX-Y:
+    Sen Agent X - ROL_ADI'sın. [PROJE_ADI] projesinde [GÖREV_AÇIKLAMASI].
+    GÖREV: [Bu fazda yapılacak iş detayı]
+    KURALLAR: [Varsa özel kurallar]
+    ÇIKTI: [Oluşturulacak/güncellenecek dosyalar]
+
+  FAZ SAYILARI:
+    Agent 1: 18 faz (A1-1 → A1-18)
+    Agent 2: 20 faz (A2-1 → A2-20) ← nesne sayısına göre fazla olabilir
+    Agent 3: 18 faz (A3-1 → A3-18)
+    Agent 4: 18 faz (A4-1 → A4-18)
+    Agent 5: 18 faz (A5-1 → A5-18)
+    Agent 6: 18 faz (A6-1 → A6-18)
+
+  Agent 2'nin fazı neden fazla olabilir:
+    Nesne sayısı çoksa bir dalgada birden fazla nesne oluşturulur.
+    Örn: Dalga 2'de A2-2 (pul) + A2-3 (bar+bearoff) = 2 faz
+
+================================================================================
+BÖLÜM 12: SHARED CONTRACTS (İÇERİK DEĞİŞİR, YAPI AYNI)
+================================================================================
+
+  shared/contracts/objectRegistry.js:
+    Tüm nesnelerin merkezi kayıt defteri.
+    Her nesne için: path, type, count, description, hasInteract
+
+  shared/types/gameTypes.js:
+    Oyuna özgü tip tanımları:
+    - GameState (oyun durumu)
+    - Player (oyuncu)
+    - [OyunTaşı] (checker/tile/card/piece)
+    - [OyunAlanı] (point/square/slot)
+    - Move (hamle)
+    - INITIAL_SETUP (başlangıç dizilimi)
+    - Oyuna özgü sabitler
+
+================================================================================
+BÖLÜM 13: PROJE DOSYA AĞACI ŞABLONU
+================================================================================
+
+  <proje_adi>/
+  ├── index.html                          ← Agent 1
+  ├── server.js                           ← Agent 1
+  ├── dbConfig.js                         ← Agent 1
+  ├── docker-compose.yml                  ← Agent 1
+  ├── Dockerfile                          ← Agent 1
+  ├── nginx.conf                          ← Agent 1
+  ├── .env                                ← Ortam değişkenleri
+  ├── .gitignore
+  ├── hangimantik.txt                     ← BU DOSYA (şablon)
+  ├── yeni_gorev_olusturucu.txt           ← Proje referans dokümanı
+  ├── AGENT_KURALLARI.txt                 ← Agent kuralları
+  ├── MASTER_FAZ_PLANI.txt                ← 18 dalga detay planı
+  ├── AGENT_KOORDINASYON_LOGU.txt         ← Agent 6 koordinasyon logu
+  │
+  ├── css/
+  │   └── ui.css                          ← Agent 3
+  │
+  ├── js/
+  │   ├── scene.js                        ← Agent 1
+  │   ├── camera.js                       ← Agent 1
+  │   ├── renderer.js                     ← Agent 1
+  │   ├── lights.js                       ← Agent 1
+  │   ├── main.js                         ← Agent 1
+  │   ├── objectLoader.js                 ← Agent 2
+  │   │
+  │   ├── ui/
+  │   │   ├── topBar.js                   ← Agent 3
+  │   │   ├── ___Panel.js                 ← Agent 3 (oyuna özgü panel)
+  │   │   ├── detailPanel.js              ← Agent 3
+  │   │   ├── notifications.js            ← Agent 3
+  │   │   └── lobby.js                    ← Agent 3
+  │   │
+  │   ├── interaction/
+  │   │   ├── raycaster.js                ← Agent 4
+  │   │   ├── selection.js                ← Agent 4
+  │   │   ├── cameraControls.js           ← Agent 4
+  │   │   └── animations.js              ← Agent 4
+  │   │
+  │   └── game/
+  │       ├── gameLogic.js                ← Agent 4+5
+  │       ├── turnManager.js              ← Agent 4
+  │       ├── moveValidator.js            ← Agent 4
+  │       └── ___Engine.js                ← Agent 4+5 (dice/deck/tile)
+  │
+  ├── objects/
+  │   ├── <nesne1>/
+  │   │   ├── model.js                    ← Agent 2
+  │   │   ├── config.json                 ← Agent 2
+  │   │   └── interact.js                 ← Agent 4
+  │   ├── <nesne2>/ ...
+  │   └── <nesneN>/ ...
+  │
+  ├── shared/
+  │   ├── contracts/
+  │   │   └── objectRegistry.js           ← Agent 5
+  │   └── types/
+  │       └── gameTypes.js                ← Agent 5
+  │
+  ├── middleware/
+  │   ├── authMiddleware.js               ← Agent 5
+  │   └── socketSecurity.js               ← Agent 5
+  │
+  ├── prompts/
+  │   ├── agent1_prompts.txt
+  │   ├── agent2_prompts.txt
+  │   ├── agent3_prompts.txt
+  │   ├── agent4_prompts.txt
+  │   ├── agent5_prompts.txt
+  │   └── agent6_prompts.txt
+  │
+  ├── otomasyon_agent1.ps1
+  ├── otomasyon_agent2.ps1
+  ├── otomasyon_agent3.ps1
+  ├── otomasyon_agent4.ps1
+  ├── otomasyon_agent5.ps1
+  ├── otomasyon_agent6.ps1
+  ├── otomasyon_master.ps1
+  │
+  ├── agent6_orchestrator/                ← Agent 6
+  │   └── dalga_gecis_raporu_X.txt
+  │
+  ├── research/                           ← Agent 5
+  │   └── dalga_X_arastirma.txt
+  │
+  ├── test/                               ← Agent 5
+  │   └── *.test.js
+  │
+  └── sinyaller/                          ← Otomasyon (gitignore'da)
+      ├── dalga_X_adim_Y_agent_Z_tamam.txt
+      └── faz_AX-Y_tamam.txt
+
+================================================================================
+BÖLÜM 14: YENİ OYUN OLUŞTURMA ADIM ADIM REHBERİ
+================================================================================
+
+Diyelim ki "Online Okey" yapmak istiyorsun. Şu adımları takip et:
+
+ADIM 1 - KİMLİK BELİRLE:
+  Proje: Online Okey
+  Klasör: online_okey
+  Oyuncu: 4 kişi
+  Online: Evet
+
+ADIM 2 - NESNELERİ LİSTELE:
+  Okey masasını kafanda canlandır. Ne görüyorsun?
+    table    → Masa (yeşil çuha kaplı kare masa)
+    rack     → İstaka (her oyuncunun önündeki taş sırası, 4 adet)
+    tile     → Taş (106 adet: 1-13 arası, 4 renk x2 + 2 sahte okey)
+    indicator→ Gösterge taşı (okey'i belirleyen taş)
+    center   → Orta havuz (kapalı taşların yığını)
+    discard  → Atma alanı (atılan taşlar)
+    border   → Masa kenarı (dekoratif)
+
+ADIM 3 - KURALLARI YAZ:
+  Başlangıç: 21'er taş dağıt (1 kişiye 22), orta havuzda kalan
+  Sıra: Saat yönünde, 22 taşlı oyuncu başlar
+  Hamle: Taş çek (havuz/atılan) → per oluştur veya taş at
+  Per: 3+ aynı sayı farklı renk VEYA 3+ ardışık aynı renk
+  Okey: Göstergenin 1 üstü joker olarak kullanılır
+  Kazanma: Tüm taşları perlere ayırıp bitiren kazanır
+  Özel: El açma, 7 çift, süper okey (çift okey)
+
+ADIM 4 - AI'YA VER:
+  Bu dosyayı (hangimantik.txt) + Adım 1-3'teki bilgileri AI'ya ver.
+  De ki: "Bu şablona göre online_okey klasörünü oluştur."
+  AI tüm dosyaları, promptları, scriptleri, nesneleri oluşturacak.
+
+================================================================================
+BÖLÜM 15: DOĞRULAMA KONTROL LİSTESİ (HER PROJEDE UYGULA)
+================================================================================
+
+Proje oluşturulduktan sonra şunları kontrol et:
+
+  □ Her nesne objects/<isim>/ klasöründe (model.js + config.json + interact.js)
+  □ objectRegistry.js tüm nesneleri içeriyor
+  □ gameTypes.js oyuna özgü tipleri tanımlıyor
+  □ Prompt dosyalarında faz sayısı = $tumFazlar dizisi uzunluğu
+  □ $dalgaAdimFaz'daki fazlar $tumFazlar'da var
+  □ bekle dizisi önceki adımdaki agent'ları gösteriyor
+  □ Agent 6 $dalgaAdimHaritasi diğer agent'larla uyumlu
+  □ Agent 6 foreach döngüsü 1..18 aralığında
+  □ index.html tüm JS dosyalarını doğru sırada yüklüyor
+  □ .gitignore sinyaller/ klasörünü içeriyor
+  □ yeni_gorev_olusturucu.txt oyuna özgü tam referans içeriyor
+  □ MASTER_FAZ_PLANI.txt 18 dalganın detayını içeriyor
+  □ AGENT_KURALLARI.txt 6 agent'ın kurallarını içeriyor
+
+================================================================================
+BÖLÜM 16: GÖRSEL TEMA ŞABLONU
+================================================================================
+
+Her oyunun kendine özgü renk paleti var. Şu formatla tanımla:
+
+  ARKA PLAN:     renderer.setClearColor(0x______) → Oyun temasına uygun
+  ANA RENK 1:    #______ → Ana yüzey rengi
+  ANA RENK 2:    #______ → İkincil yüzey rengi
+  VURGU RENGİ:   #______ → Altın/parlak vurgu
+  SEÇİM RENGİ:  #______ → Seçili nesne halkası
+  GEÇERLİ:      #00FF00 → Geçerli hedef (yeşil, sabit)
+  GEÇERSİZ:     #FF0000 → Geçersiz hedef (kırmızı, sabit)
+
+  ÖRNEKLER:
+    Tavla:   Arka plan #2C1810, Kahve+Altın, Vurgu #D4A843
+    Okey:    Arka plan #1B5E20, Yeşil çuha+Ahşap, Vurgu #FFD700
+    Satranç: Arka plan #3E2723, Siyah+Beyaz, Vurgu #FFC107
+    Pişti:   Arka plan #1B5E20, Yeşil+Kırmızı, Vurgu #FFD700
+
+================================================================================
+SON SÖZ
+================================================================================
+
+Bu şablon ile herhangi bir masa/kart/strateji oyununu 6-agent otomasyon
+sistemiyle üretebilirsin. Değişen tek şey:
+  1. Nesne listesi (objects/ klasörleri)
+  2. Oyun kuralları (gameTypes.js + moveValidator.js içeriği)
+  3. Görsel tema (renkler, boyutlar)
+  4. Prompt içerikleri (oyuna özgü görev açıklamaları)
+
+Değişmeyen şeyler:
+  1. 6 agent yapısı ve rolleri
+  2. 18 dalga planı yapısı (3 blok x 6 dalga)
+  3. Dalga adım tipleri (A, B, C, D)
+  4. Sinyal sistemi
+  5. Otomasyon script yapısı
+  6. Dosya ağacı iskeleti
+  7. Teknoloji stack (Three.js + Tailwind + GSAP + Socket.IO)
+
+AI'ya bu dosyayı ver + oyun bilgilerini söyle = komple proje iskeleti çıkar.
+================================================================================

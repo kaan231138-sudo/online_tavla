@@ -1,0 +1,110 @@
+================================================================================
+AGENT 1 - SCENE_MASTER - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A1-1:
+Sen Agent 1 - SCENE_MASTER'sın. Online Tavla projesinde Three.js sahne kurulumunu yapıyorsun.
+GÖREV: index.html oluştur (Three.js + Tailwind + GSAP CDN), js/scene.js (sahne),
+js/camera.js (üstten açılı kamera), js/renderer.js (WebGL renderer),
+js/lights.js (AmbientLight + DirectionalLight), js/main.js (init fonksiyonu).
+KURALLAR: renderer.shadowMap.enabled=false, setPixelRatio(1),
+setClearColor(0x2C1810), OrbitControls enableRotate=false.
+window.onload KULLANMA, init() anında çağır.
+ÇIKTI: index.html, js/scene.js, js/camera.js, js/renderer.js, js/lights.js, js/main.js
+
+PROMPT A1-2:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sahneye pul (checker), bar ve toplama bölgesi (bearoff) nesnelerini
+objectLoader üzerinden entegre et. Agent 2'nin oluşturduğu modelleri sahneye ekle.
+ÇIKTI: js/main.js güncelle, js/objectLoader.js'e yeni nesne kayıtları ekle.
+
+PROMPT A1-3:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sahneye zar (dice) nesnelerini entegre et. Zar atma pozisyonu belirle.
+ÇIKTI: js/main.js güncelle.
+
+PROMPT A1-4:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sahne güncelleme döngüsünü (render loop) optimize et.
+requestAnimationFrame ile verimli render. Gereksiz yeniden çizimi önle.
+ÇIKTI: js/renderer.js güncelle.
+
+PROMPT A1-5:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Game loop entegrasyonu. Oyun durumuna göre sahne güncelleme.
+Sıra değişiminde kamera hafif geçiş efekti.
+ÇIKTI: js/main.js güncelle.
+
+PROMPT A1-6:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sahne performans optimizasyonu. Frustum culling, geometry merge,
+gereksiz draw call azaltma. FPS sayacı ekle (debug modda).
+ÇIKTI: js/renderer.js, js/scene.js güncelle.
+
+PROMPT A1-7:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Bar bölgesi sahne düzenlemesi. Bar'daki pulların istif görünümü
+için sahne pozisyonlarını ayarla.
+ÇIKTI: js/scene.js güncelle.
+
+PROMPT A1-8:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Toplama bölgesi sahne düzenlemesi. Toplanan pulların yan tarafa
+dizilmesi için pozisyon ayarları.
+ÇIKTI: js/scene.js güncelle.
+
+PROMPT A1-9:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Skor sahne efektleri. Kazanma anında confetti/parıltı particle efekti.
+ÇIKTI: js/scene.js güncelle.
+
+PROMPT A1-10:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: server.js temel yapı. Express + Socket.IO sunucu kurulumu.
+Oda yönetimi, oyuncu eşleştirme temel altyapısı.
+ÇIKTI: server.js oluştur.
+
+PROMPT A1-11:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Socket.IO sunucu entegrasyonu. Hamle senkronizasyonu, zar sonucu
+paylaşımı, oyun durumu broadcast.
+ÇIKTI: server.js güncelle.
+
+PROMPT A1-12:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sunucu optimizasyonu. Bağlantı havuzu, hata yönetimi, reconnect.
+ÇIKTI: server.js güncelle.
+
+PROMPT A1-13:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Ses sistemi entegrasyonu. Web Audio API ile ses yöneticisi.
+Zar sesi, pul taşıma sesi, bildirim sesi.
+ÇIKTI: js/audio.js oluştur, js/main.js güncelle.
+
+PROMPT A1-14:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Durum yönetimi (state management). Oyun durumunu snapshot olarak
+kaydetme ve geri yükleme altyapısı.
+ÇIKTI: js/stateManager.js oluştur.
+
+PROMPT A1-15:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Özel durum sahne efektleri. Çift zar geldiğinde özel görsel efekt.
+ÇIKTI: js/scene.js güncelle.
+
+PROMPT A1-16:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Sohbet socket entegrasyonu. Sohbet mesajlarını Socket.IO ile ilet.
+ÇIKTI: server.js güncelle.
+
+PROMPT A1-17:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Veritabanı entegrasyonu. Oyuncu profili, skor, istatistik kayıt.
+ÇIKTI: dbConfig.js oluştur, server.js güncelle.
+
+PROMPT A1-18:
+Sen Agent 1 - SCENE_MASTER'sın.
+GÖREV: Final performans optimizasyonu. Memory leak kontrolü, dispose işlemleri,
+production build hazırlığı. Docker + nginx yapılandırması.
+ÇIKTI: js/renderer.js, Dockerfile, docker-compose.yml, nginx.conf güncelle.

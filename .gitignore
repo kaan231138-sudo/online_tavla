@@ -1,0 +1,5 @@
+node_modules/
+sinyaller/
+.env
+*.log
+.DS_Store

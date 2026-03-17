@@ -1,0 +1,207 @@
+================================================================================
+🎲 ONLINE TAVLA - YENİ GÖREV OLUŞTURUCU - TAM SİSTEM REFERANS DOKÜMANI
+================================================================================
+Bu dosya, Online Tavla otomasyon sisteminin TÜM iç mekanizmalarını açıklar.
+Herhangi bir AI'ya bu dosyayı referans gösterip yeni dalga/faz eklemesini
+isteyebilirsiniz.
+
+PROJE: 3D Online Tavla Oyunu
+TEKNOLOJİ: Three.js + Tailwind CSS + GSAP + Vanilla JS (tek sayfa, sunucusuz)
+FRAMEWORK: React/Vue/Angular YASAK. Three.js + Tailwind CDN üzerinden.
+ONLINE: Socket.IO ile gerçek zamanlı çok oyunculu
+
+GÖRSEL TEMA:
+  - Sıcak, klasik tavla tahtası renkleri (koyu kahve + açık kahve)
+  - Üçgenler (point): Siyah ve beyaz/krem, dönüşümlü
+  - Pullar: Siyah ve beyaz, parlak yüzey, silindir geometri
+  - Zarlar: Beyaz, siyah noktalı, yuvarlatılmış köşeler
+  - Gölgeler KAPALI, renkler temiz, Low-poly/Retro tarz
+  - renderer.shadowMap.enabled = false
+  - renderer.setPixelRatio(1)
+  - renderer.setClearColor() ile arka plan rengi sabit
+
+KRİTİK TEKNİK KURALLAR (Siyah Ekran Engelleme):
+  1. renderer.shadowMap.enabled = false (gölge tamamen kapalı)
+  2. renderer.setPixelRatio(1) (piksel oranı sabit)
+  3. renderer.setClearColor(0x2C1810) ile arka plan rengi sabit (koyu kahve)
+  4. window.onload KULLANMA! init() kodu yüklenir yüklenmez anında tetikle
+  5. Mobil WebGL çökmesini önlemek için düşük polygon sayısı
+
+KAMERA:
+  - Üstten hafif açılı bakış (tavla tahtasını tam görecek şekilde)
+  - Mouse ile hafif pan ve zoom
+  - Döndürme (Rotate) KESİNLİKLE KAPALI
+  - OrbitControls: enableRotate = false
+
+TAVLA KURALLARI (OYUN MANTIĞI):
+  - 15'er pul, 2 zar, 24 üçgen (point), bar, toplama bölgesi
+  - Başlangıç dizilimi: Klasik tavla açılışı
+    Beyaz: 2@point24, 5@point13, 3@point8, 5@point6
+    Siyah: 2@point1, 5@point12, 3@point17, 5@point19
+  - Zar atma: Her turda 2 zar, çift gelirse 4 hamle
+  - Pul yeme: Tek pul varsa yenir, bar'a gider
+  - Bar'dan çıkış: Rakip ev bölgesine zar değeriyle
+  - Toplama: Tüm pullar ev bölgesinde olunca toplama başlar
+  - Kazanma: Tüm 15 pulu toplayan kazanır
+  - Mars: Rakip hiç pul toplamadıysa çift skor
+
+ETKİLEŞİM:
+  - Pula tıklayınca: GSAP ile hafif yükselme animasyonu
+  - Geçerli hedef üçgenler yeşil yanar (highlight)
+  - Hedef üçgene tıklayınca pul GSAP ile kayarak gider
+  - Zar atma: 3D zar fırlatma animasyonu
+  - Tıklanan pulun altında sarı seçim halkası
+
+HER NESNE = AYRI KLASÖR + AYRI KOD PRENSİBİ:
+  Her 3D nesne kendi klasöründe:
+    objects/<nesne_adi>/
+      ├── model.js      → Three.js geometri + mesh oluşturma
+      ├── config.json    → Boyut, renk, seviye parametreleri
+      └── interact.js    → Tıklama, seçim, sürükleme mantığı
+
+  Nesneler:
+    objects/board/         → Tavla tahtası (ana gövde, menteşe, kenarlar)
+    objects/checker/       → Pullar (siyah + beyaz, 30 adet)
+    objects/dice/          → Zarlar (2 adet, 3D küp, noktalı)
+    objects/point/         → Üçgenler (24 adet, siyah/beyaz dönüşümlü)
+    objects/bar/           → Orta bar (yenen pulların bekleme yeri)
+    objects/bearoff/       → Toplama bölgesi (pulların çıkış yeri)
+    objects/border/        → Tahta kenar çerçevesi (dekoratif)
+
+ARAYÜZ (UI - Tailwind CSS):
+  1. Üst bar: Koyu kahve + altın sarısı, oyuncu bilgileri, skor, süre
+  2. Zar paneli: Zar sonuçları, "Zar At" butonu
+  3. Detay paneli: Oyun durumu, hamle geçmişi
+  4. Bildirimler: Sıra değişimi, pul yeme, kazanma bildirimleri
+  5. Lobby: Oda oluştur/katıl ekranı
+
+6 AGENT SİSTEMİ:
+  Agent 1 - SCENE_MASTER:    Three.js sahne, kamera, renderer, ışık kurulumu
+  Agent 2 - OBJECT_ENGINE:   3D nesne modelleri (her nesne kendi klasöründe)
+  Agent 3 - UI_DESIGNER:     HTML/Tailwind arayüz (üst bar, paneller, lobby)
+  Agent 4 - INTERACTION:     Tıklama, seçim, GSAP animasyon, kamera kontrol
+  Agent 5 - RESEARCHER_QA:   Araştırma, test, dokümantasyon, shared contracts
+  Agent 6 - ORCHESTRATOR:    Denetim, dalga geçiş onayı (KOD YAZMAZ)
+
+DOSYA SAHİPLİĞİ:
+  Agent 1: index.html, js/scene.js, js/camera.js, js/renderer.js,
+           js/lights.js, js/main.js
+  Agent 2: objects/board/model.js, objects/board/config.json,
+           objects/checker/model.js, objects/checker/config.json,
+           objects/dice/model.js, objects/dice/config.json,
+           objects/point/model.js, objects/point/config.json,
+           objects/bar/model.js, objects/bar/config.json,
+           objects/bearoff/model.js, objects/bearoff/config.json,
+           objects/border/model.js, objects/border/config.json,
+           js/objectLoader.js
+  Agent 3: css/ui.css, js/ui/topBar.js, js/ui/dicePanel.js,
+           js/ui/detailPanel.js, js/ui/notifications.js,
+           js/ui/lobby.js
+  Agent 4: js/interaction/raycaster.js, js/interaction/selection.js,
+           js/interaction/cameraControls.js, js/interaction/animations.js,
+           objects/*/interact.js (tüm nesnelerin interact dosyaları),
+           js/game/moveValidator.js
+  Agent 5: research/*.txt, shared/contracts/objectRegistry.js,
+           shared/types/gameTypes.js, test/*.js
+  Agent 6: agent6_orchestrator/*.txt, AGENT_KOORDINASYON_LOGU.txt
+
+  ORTAK (Game Logic - Agent 4 + Agent 5 birlikte):
+    js/game/gameLogic.js      → Ana oyun durumu yönetimi
+    js/game/turnManager.js    → Sıra yönetimi
+    js/game/moveValidator.js  → Hamle geçerlilik kontrolü
+    js/game/diceEngine.js     → Zar motoru
+
+  ONLINE (Agent 1 + Agent 5 birlikte):
+    server.js                 → Socket.IO sunucu
+    middleware/authMiddleware.js
+    middleware/socketSecurity.js
+    dbConfig.js
+
+OTOMASYON DOSYALARI:
+  prompts/agentX_prompts.txt  → Prompt dosyaları (PROMPT AX-Y: formatı)
+  otomasyon_agentX.ps1        → PowerShell otomasyon scriptleri
+  otomasyon_master.ps1        → Tüm agent'ları başlatan master script
+
+AGENT 1-5 SCRİPT YAPISI ($dalgaAdimFaz):
+  $dalgaAdimFaz = @{
+      X = @{ adim=Y; fazlar=@("AX-Z"); bekle=@(agent_numaralari) }
+  }
+  adim: Bu agent bu dalgada kaçıncı adımda
+  fazlar: Çalıştırılacak faz kodları
+  bekle: Önceki adımdaki agent numaraları
+
+AGENT 6 SCRİPT YAPISI (FARKLI!):
+  $dalgaAdimHaritasi: Her dalga için adım-agent haritası
+  $dalgaFazlari: Her dalga için Agent 6'nın fazları
+
+SİNYAL SİSTEMİ:
+  sinyaller/dalga_X_adim_Y_agent_Z_tamam.txt → Adım sinyali
+  sinyaller/faz_AX-Y_tamam.txt → Faz sinyali
+  agent6_orchestrator/dalga_gecis_raporu_X.txt → Dalga geçiş onayı
+    (İçinde GECILEBILIR veya KOSULLU GECIS ZORUNLU)
+
+MEVCUT FAZ HARİTASI (18 Dalga):
+  Agent 1: A1-1→A1-18 (18 faz, 18 dalga)
+  Agent 2: A2-1→A2-20 (20 faz, 18 dalga)
+  Agent 3: A3-1→A3-18 (18 faz, 18 dalga)
+  Agent 4: A4-1→A4-18 (18 faz, 18 dalga)
+  Agent 5: A5-1→A5-18 (18 faz, 18 dalga)
+  Agent 6: A6-1→A6-18 (18 faz, 18 dalga)
+
+DALGA ADIM YAPISI:
+  Dalga 1:  Adım1(1,2,3,5) → Adım2(4)
+  Dalga 2:  Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 3:  Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 4:  Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 5:  Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 6:  Adım1(1,2,3,4,5) → herkes paralel
+  Dalga 7:  Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 8:  Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 9:  Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 10: Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 11: Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 12: Adım1(1,2,3,4,5) → herkes paralel
+  Dalga 13: Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 14: Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 15: Adım1(2,5) → Adım2(1,3) → Adım3(4)
+  Dalga 16: Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 17: Adım1(2,3,5) → Adım2(1) → Adım3(4)
+  Dalga 18: Adım1(1,2,3,4,5) → herkes paralel
+
+DALGA İÇERİKLERİ:
+  Dalga 1:  Temel sahne + tahta + üçgenler + ilk UI
+  Dalga 2:  Pullar + bar + toplama bölgesi modelleri
+  Dalga 3:  Zarlar + zar atma mekaniği + animasyon
+  Dalga 4:  Pul seçme + hedef gösterme + taşıma
+  Dalga 5:  Oyun mantığı: sıra, hamle doğrulama, pul yeme
+  Dalga 6:  Entegrasyon + hata düzeltme + polish
+  Dalga 7:  Bar mekaniği + bar'dan çıkış
+  Dalga 8:  Toplama mekaniği + oyun sonu
+  Dalga 9:  Mars/tek kazanma + skor sistemi
+  Dalga 10: Lobby UI + oda sistemi
+  Dalga 11: Socket.IO sunucu + gerçek zamanlı bağlantı
+  Dalga 12: Entegrasyon + online test + polish
+  Dalga 13: Zar animasyonu gelişmiş + ses efektleri
+  Dalga 14: Hamle geçmişi + geri alma
+  Dalga 15: Çift zar (tavla) kuralları + özel durumlar
+  Dalga 16: Sohbet sistemi + emoji
+  Dalga 17: Sıralama + istatistik + profil
+  Dalga 18: Final entegrasyon + performans + yayın
+
+YENİ DALGA EKLEME:
+  1. Plan oluştur (hedef, agent görevleri, adım bağımlılıkları)
+  2. prompts/agentX_prompts.txt'e PROMPT ekle (6 dosya)
+  3. otomasyon_agentX.ps1'de $dalgaAdimFaz + $tumFazlar güncelle (6 dosya)
+  4. Agent 6'da $dalgaAdimHaritasi + $dalgaFazlari + foreach aralığı güncelle
+  5. Doğrulama kontrol listesini uygula
+  6. Git commit + push
+
+DOĞRULAMA KONTROL LİSTESİ:
+  □ Prompt token sırası = $tumFazlar sırası
+  □ $dalgaAdimFaz'daki fazlar $tumFazlar'da var
+  □ bekle dizisi önceki adımdaki agent'ları gösteriyor
+  □ Agent 6 $dalgaAdimHaritasi diğer agent'larla uyumlu
+  □ Agent 6 foreach döngüsü tüm dalgaları kapsıyor
+  □ Her nesne kendi objects/<isim>/ klasöründe (model.js + config.json + interact.js)
+  □ Yeni nesne eklendiğinde objectRegistry.js güncellendi
+================================================================================

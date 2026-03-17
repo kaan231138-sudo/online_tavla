@@ -1,0 +1,7 @@
+{
+    "name": "bearoff",
+    "description": "Toplama bölgesi (pulların çıkış yeri)",
+    "dimensions": { "width": 1.0, "height": 0.5, "depth": 5 },
+    "colors": { "body": "#2C1810", "tray": "#8B6914" },
+    "position": { "white": { "x": -8, "y": 0, "z": 0 }, "black": { "x": 8, "y": 0, "z": 0 } }
+}

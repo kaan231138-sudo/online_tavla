@@ -1,0 +1,78 @@
+================================================================================
+AGENT 6 - ORCHESTRATOR - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A6-1:
+Sen Agent 6 - ORCHESTRATOR'sün. KOD YAZMIYORSUN, sadece denetliyorsun.
+GÖREV: Dalga 1 denetim. Sahne kurulumu, tahta modeli, üst bar UI,
+kamera kontrolleri doğru mu? Geçiş raporu yaz.
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_1.txt
+
+PROMPT A6-2:
+GÖREV: Dalga 2 denetim. Pul, bar, bearoff modelleri doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_2.txt
+
+PROMPT A6-3:
+GÖREV: Dalga 3 denetim. Zar modeli, zar paneli, zar animasyonu doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_3.txt
+
+PROMPT A6-4:
+GÖREV: Dalga 4 denetim. Pul taşıma, hedef highlight, hamle doğrulama doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_4.txt
+
+PROMPT A6-5:
+GÖREV: Dalga 5 denetim. Oyun mantığı, sıra yönetimi, pul yeme doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_5.txt
+
+PROMPT A6-6:
+GÖREV: Dalga 6 denetim (ARA MİLESTONE). Offline oyun tamamen çalışıyor mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_6.txt
+
+PROMPT A6-7:
+GÖREV: Dalga 7 denetim. Bar mekaniği doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_7.txt
+
+PROMPT A6-8:
+GÖREV: Dalga 8 denetim. Toplama mekaniği + oyun sonu doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_8.txt
+
+PROMPT A6-9:
+GÖREV: Dalga 9 denetim. Mars/tek/gammon + skor doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_9.txt
+
+PROMPT A6-10:
+GÖREV: Dalga 10 denetim. Lobby UI + oda sistemi doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_10.txt
+
+PROMPT A6-11:
+GÖREV: Dalga 11 denetim. Socket.IO + online bağlantı doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_11.txt
+
+PROMPT A6-12:
+GÖREV: Dalga 12 denetim (ARA MİLESTONE). Online oyun çalışıyor mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_12.txt
+
+PROMPT A6-13:
+GÖREV: Dalga 13 denetim. Gelişmiş zar + ses doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_13.txt
+
+PROMPT A6-14:
+GÖREV: Dalga 14 denetim. Hamle geçmişi + undo doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_14.txt
+
+PROMPT A6-15:
+GÖREV: Dalga 15 denetim. Çift zar + özel durumlar doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_15.txt
+
+PROMPT A6-16:
+GÖREV: Dalga 16 denetim. Sohbet sistemi doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_16.txt
+
+PROMPT A6-17:
+GÖREV: Dalga 17 denetim. Sıralama + profil doğru mu?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_17.txt
+
+PROMPT A6-18:
+GÖREV: Dalga 18 FİNAL DENETİM. Tüm sistem yayına hazır mı?
+ÇIKTI: agent6_orchestrator/dalga_gecis_raporu_18.txt

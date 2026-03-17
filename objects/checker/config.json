@@ -1,0 +1,15 @@
+{
+    "name": "checker",
+    "description": "Pullar (15 siyah + 15 beyaz)",
+    "count": 30,
+    "dimensions": { "radius": 0.4, "height": 0.12 },
+    "colors": {
+        "white": "#F5F5F5",
+        "black": "#1A1A1A",
+        "selectionRing": "#FFD700"
+    },
+    "initialSetup": {
+        "white": { "24": 2, "13": 5, "8": 3, "6": 5 },
+        "black": { "1": 2, "12": 5, "17": 3, "19": 5 }
+    }
+}

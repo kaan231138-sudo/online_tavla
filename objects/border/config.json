@@ -1,0 +1,6 @@
+{
+    "name": "border",
+    "description": "Tahta kenar çerçevesi (dekoratif)",
+    "dimensions": { "thickness": 0.3, "height": 0.6 },
+    "colors": { "body": "#1A0F0A", "accent": "#D4A843" }
+}

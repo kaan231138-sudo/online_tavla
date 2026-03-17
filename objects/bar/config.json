@@ -1,0 +1,7 @@
+{
+    "name": "bar",
+    "description": "Orta bar (yenen pulların bekleme yeri)",
+    "dimensions": { "width": 0.8, "height": 0.6, "depth": 10 },
+    "colors": { "body": "#1A0F0A" },
+    "position": { "x": 0, "y": 0.25, "z": 0 }
+}

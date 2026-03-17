@@ -1,0 +1,116 @@
+================================================================================
+AGENT 4 - INTERACTION - PROMPT DOSYASI
+Proje: Online Tavla (3D)
+================================================================================
+
+PROMPT A4-1:
+Sen Agent 4 - INTERACTION'sın. Online Tavla projesinde etkileşim ve animasyon yapıyorsun.
+GÖREV: Kamera kontrolleri. OrbitControls ile pan + zoom, enableRotate=false.
+Tavla tahtasını ortalayan kamera pozisyonu.
+ÇIKTI: js/interaction/cameraControls.js
+
+PROMPT A4-2:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Pul seçim sistemi. Raycaster ile pul tıklama, seçili pulun altında
+sarı halka (selection ring), sadece sırası gelen oyuncunun pulları seçilebilir.
+ÇIKTI: js/interaction/raycaster.js, js/interaction/selection.js,
+objects/checker/interact.js
+
+PROMPT A4-3:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Zar fırlatma animasyonu. "Zar At" butonuna basınca GSAP ile
+3D zar dönme + düşme animasyonu. Rastgele sonuç.
+ÇIKTI: js/interaction/animations.js, objects/dice/interact.js,
+js/game/diceEngine.js
+
+PROMPT A4-4:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Pul taşıma mekaniği. Seçili pul + zar değerine göre geçerli
+hedef üçgenleri yeşil highlight. Hedefe tıklayınca GSAP ile kayma animasyonu.
+ÇIKTI: js/interaction/selection.js güncelle, objects/point/interact.js,
+js/game/moveValidator.js
+
+PROMPT A4-5:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: turnManager + pul yeme mekaniği. Sıra yönetimi, pul yeme tespiti,
+yenen pulun bar'a gönderilmesi animasyonu.
+ÇIKTI: js/game/turnManager.js, js/game/gameLogic.js,
+objects/checker/interact.js güncelle
+
+PROMPT A4-6:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Animasyon polish + bug fix. Tüm animasyonların akıcılığı,
+zamanlama ayarları, edge case düzeltmeleri.
+ÇIKTI: js/interaction/animations.js güncelle
+
+PROMPT A4-7:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Bar'dan çıkış mekaniği. Bar'da pul varken zorunlu olarak önce
+bar'dan çıkış. Rakip ev bölgesine zar değeriyle giriş.
+ÇIKTI: js/game/moveValidator.js güncelle, objects/bar/interact.js
+
+PROMPT A4-8:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Toplama mekaniği + oyun sonu tespiti. Tüm pullar ev bölgesindeyse
+toplama başlar. 15 pul toplandığında oyun biter.
+ÇIKTI: js/game/gameLogic.js güncelle, objects/bearoff/interact.js
+
+PROMPT A4-9:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Mars/tek hesaplama + skor kayıt. Rakip hiç toplamadıysa mars (2x).
+Rakip ev bölgesinde pul varsa gammon (3x).
+ÇIKTI: js/game/gameLogic.js güncelle
+
+PROMPT A4-10:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Lobby etkileşim. Oda seçimi, oda oluşturma, katılma buton
+etkileşimleri.
+ÇIKTI: js/interaction/raycaster.js güncelle (lobby modu)
+
+PROMPT A4-11:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Online hamle senkronizasyonu. Socket.IO ile hamle gönderme/alma,
+rakibin hamlesini animasyonla gösterme.
+ÇIKTI: js/game/gameLogic.js güncelle (online mod)
+
+PROMPT A4-12:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Online oyun test + bug fix. Gecikme, senkronizasyon sorunları,
+bağlantı kopma durumları.
+ÇIKTI: js/game/ dosyaları güncelle
+
+PROMPT A4-13:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Zar fizik animasyonu + ses tetikleme. Gerçekçi zar yuvarlanma,
+zar sesi, pul taşıma sesi tetikleme.
+ÇIKTI: js/interaction/animations.js güncelle
+
+PROMPT A4-14:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Undo mekaniği + hamle kaydı. Son hamleyi geri alma, hamle
+geçmişi kaydetme.
+ÇIKTI: js/game/gameLogic.js güncelle
+
+PROMPT A4-15:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Çift zar 4 hamle + hamle yapamama durumu. Çift gelince 4 hamle
+hakkı, hiç hamle yapılamıyorsa otomatik pas.
+ÇIKTI: js/game/moveValidator.js güncelle, js/game/turnManager.js güncelle
+
+PROMPT A4-16:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Sohbet etkileşim + emoji gönderme. Sohbet paneli açma/kapama,
+mesaj gönderme, emoji seçme etkileşimi.
+ÇIKTI: js/interaction/raycaster.js güncelle (chat modu)
+
+PROMPT A4-17:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Profil etkileşim + istatistik görüntüleme. Profil sayfası
+navigasyonu, istatistik grafikleri etkileşimi.
+ÇIKTI: js/interaction/raycaster.js güncelle
+
+PROMPT A4-18:
+Sen Agent 4 - INTERACTION'sın.
+GÖREV: Tüm etkileşim final test. Her mekanizmanın çalıştığını doğrula,
+edge case'leri test et, son düzeltmeler.
+ÇIKTI: Tüm interaction + game dosyaları final güncelle

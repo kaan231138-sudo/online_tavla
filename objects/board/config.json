@@ -1,0 +1,11 @@
+{
+    "name": "board",
+    "description": "Tavla tahtası ana gövdesi",
+    "dimensions": { "width": 14, "height": 0.5, "depth": 10 },
+    "colors": {
+        "dark": "#2C1810",
+        "light": "#8B6914",
+        "border": "#1A0F0A"
+    },
+    "position": { "x": 0, "y": 0, "z": 0 }
+}

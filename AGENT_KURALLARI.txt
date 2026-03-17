@@ -1,0 +1,76 @@
+================================================================================
+🎲 ONLINE TAVLA - AGENT KURALLARI
+================================================================================
+
+GENEL KURALLAR (TÜM AGENTLAR İÇİN):
+  1. Sadece kendi dosyalarına dokunabilirsin
+  2. Başka agent'ın dosyasını DEĞİŞTİRME
+  3. shared/ klasörü Agent 5 yönetir, diğerleri OKUR
+  4. Sinyal dosyalarını zamanında oluştur
+  5. Her dalga sonunda Agent 6 onayı BEKLE
+  6. window.onload KULLANMA - init() anında tetikle
+  7. renderer.shadowMap.enabled = false (gölge kapalı)
+  8. React/Vue/Angular YASAK - sadece Vanilla JS
+  9. Her nesne objects/<isim>/ klasöründe izole
+
+AGENT 1 - SCENE_MASTER:
+  Görev: Three.js sahne, kamera, renderer, ışık kurulumu
+  Dosyalar: index.html, js/scene.js, js/camera.js, js/renderer.js,
+            js/lights.js, js/main.js
+  Kurallar:
+    - Kamera üstten hafif açılı, tavla tahtasını tam görecek
+    - OrbitControls: enableRotate = false
+    - renderer.setClearColor(0x2C1810) koyu kahve arka plan
+    - Sahneye sadece objectLoader üzerinden nesne ekle
+
+AGENT 2 - OBJECT_ENGINE:
+  Görev: 3D nesne modelleri oluşturma
+  Dosyalar: objects/*/model.js, objects/*/config.json, js/objectLoader.js
+  Kurallar:
+    - Her nesne kendi klasöründe: objects/<isim>/
+    - model.js: create<Nesne>() fonksiyonu export et
+    - config.json: boyut, renk, pozisyon parametreleri
+    - Düşük polygon, gölge yok, temiz renkler
+    - Pul = CylinderGeometry, Zar = RoundedBoxGeometry
+    - Üçgen = ExtrudeGeometry veya custom shape
+
+AGENT 3 - UI_DESIGNER:
+  Görev: HTML/Tailwind arayüz tasarımı
+  Dosyalar: css/ui.css, js/ui/topBar.js, js/ui/dicePanel.js,
+            js/ui/detailPanel.js, js/ui/notifications.js, js/ui/lobby.js
+  Kurallar:
+    - Tailwind CDN kullan, özel CSS minimal
+    - Üst bar: oyuncu adları, skor, süre
+    - Zar paneli: zar sonuçları + "Zar At" butonu
+    - Lobby: oda listesi, oda oluştur, katıl
+
+AGENT 4 - INTERACTION:
+  Görev: Tıklama, seçim, animasyon, oyun mekaniği
+  Dosyalar: js/interaction/*.js, objects/*/interact.js,
+            js/game/moveValidator.js
+  Kurallar:
+    - Raycaster ile pul seçimi
+    - Seçili pulun altında sarı halka
+    - Geçerli hedefler yeşil highlight
+    - GSAP ile pul taşıma animasyonu
+    - Zar fırlatma 3D animasyonu
+
+AGENT 5 - RESEARCHER_QA:
+  Görev: Araştırma, test, dokümantasyon, shared contracts
+  Dosyalar: research/*.txt, shared/contracts/objectRegistry.js,
+            shared/types/gameTypes.js, test/*.js
+  Kurallar:
+    - objectRegistry.js: tüm nesnelerin kayıt defteri
+    - gameTypes.js: ortak tip tanımları
+    - Her dalga öncesi araştırma notu hazırla
+    - Test senaryoları yaz
+
+AGENT 6 - ORCHESTRATOR:
+  Görev: Denetim, dalga geçiş onayı
+  Dosyalar: agent6_orchestrator/*.txt, AGENT_KOORDINASYON_LOGU.txt
+  Kurallar:
+    - KOD YAZMAZ, sadece denetler
+    - Her dalga sonunda geçiş raporu yazar
+    - GECILEBILIR veya KOSULLU GECIS ZORUNLU kararı verir
+    - Tutarlılık kontrolü yapar
+================================================================================
